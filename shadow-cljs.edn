@@ -1,0 +1,19 @@
+;; shadow-cljs configuration
+{:builds {:browser {:target     :browser
+                    :modules    {:base {:entries [keys.core]}}
+                    :output-dir "out/public/js"
+                    :asset-path "/js"
+                    :devtools   {:http-root  "out/public"
+                                 :http-port  8705
+                                 :after-load keys.core/render}
+                    :js-options {:resolve {"react"
+                                           {:target :npm
+                                            :require "react/cjs/react.development.js"
+                                            :require-min "react/cjs/react.production.min.js"}
+
+                                           "react-dom"
+                                           {:target :npm
+                                            :require "react-dom/cjs/react-dom.development.js"
+                                            :require-min "react-dom/cjs/react-dom.production.min.js"}}}}}
+
+ :lein   true}
