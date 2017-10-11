@@ -1,19 +1,28 @@
 ;; shadow-cljs configuration
-{:builds {:browser {:target     :browser
-                    :modules    {:base {:entries [keys.core]}}
-                    :output-dir "out/public/js"
-                    :asset-path "/js"
-                    :devtools   {:http-root  "out/public"
-                                 :http-port  8705
-                                 :after-load keys.core/render}
-                    :js-options {:resolve {"react"
-                                           {:target :npm
-                                            :require "react/cjs/react.development.js"
-                                            :require-min "react/cjs/react.production.min.js"}
+{:dependencies [[thheller/shadow-cljs "2.0.8"]
+                [re-view "0.3.33-SNAPSHOT"]
+                [re-view-routing "0.1.3"]]
+ :source-paths ["src"]
+ :builds       {:browser {:target           :browser
+                          :modules          {:base {:entries [keys-test.core]}}
+                          :output-dir       "out/public/js"
+                          :asset-path       "/js"
+                          :devtools         {:http-root  "out/public"
+                                             :http-port  8705
+                                             :after-load keys-test.core/render}
+                          :source-paths     ["src"]
+                          :js-options       {:resolve {"react"
+                                                       {:target      :npm
+                                                        :require     "react/cjs/react.development.js"
+                                                        :require-min "react/cjs/react.production.min.js"}
 
-                                           "react-dom"
-                                           {:target :npm
-                                            :require "react-dom/cjs/react-dom.development.js"
-                                            :require-min "react-dom/cjs/react-dom.production.min.js"}}}}}
-
- :lein   true}
+                                                       "react-dom"
+                                                       {:target      :npm
+                                                        :require     "react-dom/cjs/react-dom.development.js"
+                                                        :require-min "react-dom/cjs/react-dom.production.min.js"}
+                                                       "keypress.js"
+                                                       {:target  :npm
+                                                        :require "keypress.js/keypress-2.1.4.min.js"}}}
+                          :compiler-options {:externs ["externs/react.ext.js"
+                                                       "externs/react-dom.ext.js"
+                                                       "externs/keys_test.ext.js"]}}}}
