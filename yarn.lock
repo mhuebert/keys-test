@@ -111,6 +111,10 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
+combokeys@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/combokeys/-/combokeys-3.0.0.tgz#955c59a3959af40d26846ab6fc3c682448e7572e"
+
 console-browserify@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-browserify/-/console-browserify-1.1.0.tgz#f0241c45730a9fc6323b206dbf38edc741d0bb10"
@@ -305,6 +309,10 @@ isomorphic-fetch@^2.1.1:
 js-tokens@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
+
+keymaster@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/keymaster/-/keymaster-1.6.2.tgz#e1ae54d0ea9488f9f60b66b668f02e9a1946c6eb"
 
 keypress.js@^2.1.4:
   version "2.1.4"
@@ -537,9 +545,9 @@ shadow-cljs-jar@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/shadow-cljs-jar/-/shadow-cljs-jar-0.10.0.tgz#9895e6e5ccfde1c7b673737b1dfd9149194b644f"
 
-shadow-cljs@2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/shadow-cljs/-/shadow-cljs-2.0.8.tgz#95a21ec2090b4abc4b3367cf72472d2cd2eacb59"
+shadow-cljs@2.0.10:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/shadow-cljs/-/shadow-cljs-2.0.10.tgz#84efe0ddf57f480d6d1f77c4d3070b5d6d44ca58"
   dependencies:
     mkdirp "^0.5.1"
     node-libs-browser "^2.0.0"
