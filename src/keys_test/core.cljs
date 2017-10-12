@@ -4,13 +4,13 @@
             [re-view-routing.core :as r]
             ["combokeys" :as CombokeysInit]
             ["keymaster" :as Keymaster]
-    #_["keypress.js" :as KP :refer [keypress]]
+            ["keypress.js" :as KP :refer [keypress]]
             [clojure.string :as string]
             [goog.object :as gobj]))
 
 (defonce Combokeys (CombokeysInit. js/document.documentElement))
 
-#_(defonce Keypress (new (gobj/getValueByKeys KP "keypress" "Listener")))
+(defonce Keypress (new (.-Listener keypress)))
 (r/listen #(d/transact! [(assoc % :db/id ::router)]))
 
 ;;;;;;;;;;;;;;;;;;;;;
@@ -101,10 +101,10 @@
       (do (Keymaster binding-string action)
           #(.unbind Keymaster binding-string))
 
-      #_:Keypress
-      #_(do
-          (.simple_combo Keypress binding-string action)
-          #(.unregister_combo Keypress binding-string)))))
+      :Keypress
+      (do
+        (.simple_combo Keypress binding-string action)
+        #(.unregister_combo Keypress binding-string)))))
 
 (defview combo-test
   {:listen                  (fn [{:keys [view/props library binding view/prev-props view/state]}]
@@ -162,7 +162,7 @@
      [:.flex-none
       (when-not library [:.b.ma3 "Please select a library: "])
       [:.f6.bg-darken-lightly
-       (for [library-option [#_:Keypress :Combokeys :Keymaster]
+       (for [library-option [:Keypress :Combokeys :Keymaster]
              :let [active? (= library-option library)]]
          [:.pa2.ma2.f6.dib
           {:on-click #(r/swap-query! assoc :library (name library-option))

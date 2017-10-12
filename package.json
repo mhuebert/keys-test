@@ -2,7 +2,7 @@
   "dependencies": {
     "combokeys": "^3.0.0",
     "keymaster": "^1.6.2",
-    "keypress.js": "^2.1.4",
+    "keypress.js": "braintripping/Keypress#6655089",
     "mousetrap": "^1.6.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",

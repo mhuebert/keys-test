@@ -19,10 +19,7 @@
                                                        "react-dom"
                                                        {:target      :npm
                                                         :require     "react-dom/cjs/react-dom.development.js"
-                                                        :require-min "react-dom/cjs/react-dom.production.min.js"}
-                                                       "keypress.js"
-                                                       {:target  :npm
-                                                        :require "keypress.js/keypress-2.1.4.min.js"}}}
+                                                        :require-min "react-dom/cjs/react-dom.production.min.js"}}}
                           :compiler-options {:externs ["externs/react.ext.js"
                                                        "externs/react-dom.ext.js"
                                                        "externs/keys_test.ext.js"]}}}}
