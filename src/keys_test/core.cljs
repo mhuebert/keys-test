@@ -35,13 +35,25 @@
 (defn remap-vec [pmap coll]
   (mapv (fn [x] (get pmap x x)) coll))
 
+(def mac? (re-find #"Mac|iPod|iPhone|iPad" (.-platform js/navigator)))
+
+
+(defn pmap [library]
+  (case library :Mousetrap {"M1" "mod"
+                            "M2" "alt"}
+                :display {"M1" (if mac?
+                                 "Command"
+                                 "Control")
+                          "M2" (if mac?
+                                 "Option" "Alt")
+                          "shift" "Shift"}
+                :querystring {}))
+
 (defn binding-string [library keys]
-  (let [[separator M1 M2] (case library :Mousetrap ["+" "mod" "alt"]
-                                        ;:Keypress [" " "meta" "alt"]
-                                        :display ["-" "M1" "M2"]
-                                        :querystring [" " "M1" "M2"])]
-    (->> (remap-vec {"M1" M1
-                     "M2" M2} keys)
+  (let [separator (case library :Mousetrap "+"
+                                :display "-"
+                                :querystring " ")]
+    (->> (remap-vec (pmap library) keys)
          (string/join separator))))
 
 (defn bind [library binding action]
@@ -94,27 +106,28 @@
                                        #"\s")) "")
      :library (keyword library)}))
 
-(defn show-char [selected the-char state]
+(defn show-char [selected the-char pmap state]
   (let [active? (selected the-char)]
     [:.pa1.dib.monospace
      {:on-mouse-down #(do (r/swap-query! assoc :keystring (js/encodeURIComponent (binding-string :querystring ((if active? disj conj) (:binding (query-vals)) the-char))))
                           (.preventDefault %))
       :class         (if active? "b white bg-dark-gray" " hover-bg-darken pointer")}
-     the-char]))
+     (get pmap the-char the-char)]))
 
 (defview keys-test
   [{:keys [view/state]}]
   (let [{binding :binding
-         library :library} (query-vals)]
+         library :library} (query-vals)
+        display-pmap (pmap :display)]
     [:.monospace.pa3
      [:.flex.items-center.f6.bg-darken-lightly.pa3
-        [:.b.mr2 "Library: "]
-        (for [library-option [#_:Keypress :Mousetrap]
-              :let [active? (= library-option library)]]
-          [:.pa2.dib.f6
-           {:on-click #(r/swap-query! assoc :library (name library-option))
-            :class    (if active? "b white bg-dark-gray" " hover-bg-darken pointer")}
-           (name library-option)])]
+      [:.b.mr2 "Library: "]
+      (for [library-option [#_:Keypress :Mousetrap]
+            :let [active? (= library-option library)]]
+        [:.pa2.dib.f6
+         {:on-click #(r/swap-query! assoc :library (name library-option))
+          :class    (if active? "b white bg-dark-gray" " hover-bg-darken pointer")}
+         (name library-option)])]
 
      (combo-test {:library library
                   :binding (sort-binding binding)})
@@ -123,7 +136,7 @@
       [:.b.bg-darken.pointer.hover-bg-darken-more.ph3.pv2 {:on-click #(r/query-nav! {})} "Clear"]
       (for [char-set all-chars]
         [:.mv2.ph3 (for [ch char-set]
-                     (show-char binding ch state))])]]))
+                     (show-char binding ch display-pmap state))])]]))
 
 (defn ^:export render []
   (v/render-to-dom (keys-test) "app"))
