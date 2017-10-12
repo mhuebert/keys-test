@@ -173,7 +173,7 @@
          (combo-test {:library library
                       :binding binding})
          [:.f6.mv3
-          [:.dib.pa2.b.bg-darken.pointer.hover-bg-darken-more {:on-click #(r/swap-query! dissoc :keystring)} "Clear"]
+          [:.dib.pa2.blue.underline.pointer.hover-bg-darken {:on-click #(r/swap-query! dissoc :keystring)} "Clear"]
           [:.dib.pa2.f7.gray.i
            (name library) " string: \"" (binding-string library binding) \"
            ]]

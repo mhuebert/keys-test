@@ -5,7 +5,7 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "js/cljs-runtime",
+      "**/cljs-runtime/**",
       "js/manifest.json"
     ],
     "rewrites": [
